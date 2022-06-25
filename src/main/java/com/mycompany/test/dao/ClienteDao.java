@@ -19,11 +19,11 @@ public class ClienteDao {
     public void connect() {
         String database = "java";
         String user = "root";
-        String password = "";
+        String password = "Eduardo*123";
         String host = "localhost";
         String port = "3306";
         String driver = "com.mysql.jdbc.Driver";
-        String conexionUrl = "jdbc:mysql://" + host + ":" + port + "/"+ database + "?useSSL = false";
+        String conexionUrl = "jdbc:mysql://" + host + ":" + port + "/"+ database + "?useSSL=false";
         Connection con = null;
         try {
             Class.forName(driver);
