@@ -4,6 +4,8 @@
  */
 package com.mycompany.test;
 
+import com.mycompany.test.forms.Formulario;
+
 
 /**
  *
