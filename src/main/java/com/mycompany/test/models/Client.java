@@ -9,7 +9,9 @@ package com.mycompany.test.models;
  * @author tinycub
  */
 public class Client {
-    private String name; 
+
+    private String id;
+    private String name;
     private String lastName;
     private String email;
     private String phone;
@@ -19,6 +21,14 @@ public class Client {
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
