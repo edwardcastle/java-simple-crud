@@ -5,6 +5,7 @@
 package com.mycompany.test.dao;
 
 import com.mycompany.test.models.Client;
+import com.mysql.cj.util.StringUtils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author tinycub
+ * @author edwardcastle
  */
 public class ClienteDao {
 
@@ -39,7 +40,7 @@ public class ClienteDao {
         }
     }
 
-    public void agregar(Client cliente) {
+    public void addClient(Client cliente) {
         connect();
         try {
             String sql = "INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `telefono`, `email`) "
@@ -60,17 +61,55 @@ public class ClienteDao {
             ResultSet result = statement.executeQuery(sql);
 
             while (result.next()) {
-                Client cliente = new Client(
-                        result.getString("nombre"),
-                        result.getString("apellido"),
-                        result.getString("telefono"),
-                        result.getString("email")
-                );
-                clienteList.add(cliente);
+                Client client = new Client();
+                client.setId(result.getString("id"));
+                client.setName(result.getString("nombre"));
+                client.setLastName(result.getString("apellido"));
+                client.setEmail(result.getString("email"));
+                client.setPhone(result.getString("telefono"));
+                clienteList.add(client);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return clienteList;
+    }
+
+    public void deleteClient(String index) {
+        connect();
+        try {
+            String sql = "DELETE FROM `clientes` WHERE `clientes`.`id` = " + index;
+            Statement statement = con.createStatement();
+            statement.execute(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void editClient(Client cliente) {
+        connect();
+        try {
+            String sql = "UPDATE `clientes` SET "
+                    + "`nombre` = '" + cliente.getName() + "', "
+                    + "`apellido` = '" + cliente.getLastName() + "', "
+                    + "`telefono` = '" + cliente.getPhone() + "', "
+                    + "`email` = '" + cliente.getEmail() + "' "
+                    + "WHERE `clientes`.`id` = " + cliente.getId() + ";";
+            Statement statement = con.createStatement();
+            statement.execute(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void save(Client client) {
+        if (StringUtils.isEmptyOrWhitespaceOnly(client.getId())) {
+            System.out.println("1");
+            addClient(client);
+        } else {
+            System.out.println("2");
+            System.out.println(client.getId());
+            editClient(client);
+        }
     }
 }
