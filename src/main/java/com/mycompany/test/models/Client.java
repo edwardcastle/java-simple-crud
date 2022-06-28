@@ -6,7 +6,7 @@ package com.mycompany.test.models;
 
 /**
  *
- * @author tinycub
+ * @author edwardcastle
  */
 public class Client {
 

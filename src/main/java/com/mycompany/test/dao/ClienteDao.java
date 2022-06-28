@@ -104,11 +104,8 @@ public class ClienteDao {
 
     public void save(Client client) {
         if (StringUtils.isEmptyOrWhitespaceOnly(client.getId())) {
-            System.out.println("1");
             addClient(client);
         } else {
-            System.out.println("2");
-            System.out.println(client.getId());
             editClient(client);
         }
     }

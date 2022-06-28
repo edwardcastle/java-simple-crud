@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author tinycub
+ * @author edwardcastle
  */
 public class Formulario extends javax.swing.JFrame {
 

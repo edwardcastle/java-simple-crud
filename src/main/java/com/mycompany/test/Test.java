@@ -9,7 +9,7 @@ import com.mycompany.test.forms.Formulario;
 
 /**
  *
- * @author tinycub
+ * @author edwardcastle
  */
 public class Test {
 
